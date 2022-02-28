@@ -2,6 +2,7 @@ package com.example.dto;
 
 import com.example.entities.User;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.sun.istack.NotNull;
 
 public class UserDTO {
     @JsonProperty ("id")

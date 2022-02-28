@@ -5,10 +5,6 @@ import com.example.entities.User;
 import com.example.mapper.UserMapper;
 
 public class UserService {
-    UserMapper userMapper;
-    public UserService(){
-        this.userMapper = new UserMapper();
-    }
 
     /* steps for creating a user
     1. map the all variables in the userDTO to user object,
@@ -19,6 +15,7 @@ public class UserService {
     *
     * */
     public User createUser(UserDTO userDTO){
+        User user = UserMapper.createUser(userDTO);
 
         //if user role is reportee, set up the manager of this user
     }
