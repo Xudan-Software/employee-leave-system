@@ -1,31 +1,47 @@
 package com.example.entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Set;
 
 @Entity
 @Table(name="user_profile")
-public class User {
+public class User implements Serializable {
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
     private Long id;
+    @Column(name = "firstname")
     private String firstName;
+    @Column(name = "lastname")
     private String lastName;
+    @Column(name = "email")
     private String email;
+    @Column(name = "age")
     private Long age;
+    @Column(name = "phone")
     private String phone;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role")
     private RoleEnum role;
     private String password;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinTable(name = "user_manager",
         joinColumns = { @JoinColumn(name = "manager_id") },
         inverseJoinColumns = { @JoinColumn(name = "user_id") })
     private User manager;
+
     @OneToMany(fetch = FetchType.EAGER,
         mappedBy = "manager")
     private Set<User> managees;
+
+    @Column(name = "address")
     private String address;
+
+    @Column(name = "tag")
     private String tag;
 
 
@@ -123,9 +139,12 @@ public class User {
         return managees;
     }
 
-
     public void setManagees(Set<User> managees) {
         this.managees = managees;
+    }
+
+    public void addManagee(User managee) {
+        this.managees.add(managee);
     }
 
 

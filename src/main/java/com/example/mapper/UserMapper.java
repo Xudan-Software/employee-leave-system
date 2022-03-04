@@ -10,6 +10,7 @@ import com.example.entities.User;
 public class UserMapper {
     public static User createUser(UserDTO userDTO){
         //map variables from userDTO to user
+        //todo: make a constructor that takes parameter of uto to user's
         User user = new User();
         user.setFirstName(userDTO.getFirstName());
         user.setLastName(userDTO.getLastName());
@@ -19,6 +20,8 @@ public class UserMapper {
         user.setRole(userDTO.getRole());
         user.setAddress(userDTO.getAddress());
         user.setTag(userDTO.getTag());
+        user.setPassword(userDTO.getPassword());
+
         return user;
     }
     //TODO:implement method of userDTO to user object

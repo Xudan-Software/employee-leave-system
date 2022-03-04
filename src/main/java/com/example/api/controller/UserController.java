@@ -18,11 +18,12 @@ public class UserController {
     }
     @PostMapping(" ")
     public void postUser(@RequestBody UserDTO userDTO) {
-        try{
-            userService.createUser(userDTO);
-        }
-        catch {
+//        try{
+//            userService.createUser(userDTO);
+//        }
+//        catch{
+//
+//        }
 
-        }
     }
 }
