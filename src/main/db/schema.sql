@@ -11,6 +11,7 @@ create table if not exists user_profile (
     firstname varchar(50) not null,
     lastname varchar(50) not null,
     email text unique not null,
+    password text not null,
     age int not null,
     phone text not null,
     role text NOT NULL CHECK (role in ('MGR', 'ADMIN', 'REPORTEE')),

@@ -2,9 +2,12 @@ package com.example.services;
 
 import com.example.dto.UserDTO;
 import com.example.entities.User;
+import com.example.exceptions.NoManagerFoundById;
 import com.example.mapper.UserMapper;
 import com.example.repository.UserRepository;
 import com.example.validator.UserValidator;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.password.StandardPasswordEncoder;
 
 public class UserService {
 
@@ -18,13 +21,19 @@ public class UserService {
     * */
     UserValidator userValidator;
     UserRepository userRepository;
+    PasswordEncoder passwordEncoder;
 
     public User createUser(UserDTO userDTO){
         User user = UserMapper.createUser(userDTO);
         userValidator.validator(user);
+        if(user.getRole() == User.RoleEnum.REPORTEE){
+            User manager = userRepository.findById(userDTO.getManagerId()).orElseThrow(NoManagerFoundById::new);
+            user.setManager(manager);
+        }
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
 
-        return null;
-        //if user role is reportee, set up the manager of this user
+        return user;
     }
 
 }

@@ -2,12 +2,14 @@ package com.example.mapper;
 
 import com.example.dto.UserDTO;
 import com.example.entities.User;
+import com.example.validator.UserValidator;
 
 /***
  * This class provide static method to transform user object to userDTO object
  * or versus versa
  */
 public class UserMapper {
+
     public static User createUser(UserDTO userDTO){
         //map variables from userDTO to user
         //todo: make a constructor that takes parameter of uto to user's
@@ -21,7 +23,6 @@ public class UserMapper {
         user.setAddress(userDTO.getAddress());
         user.setTag(userDTO.getTag());
         user.setPassword(userDTO.getPassword());
-
         return user;
     }
     //TODO:implement method of userDTO to user object
